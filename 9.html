@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document</title>
+    <style>
+        
+
+        div {
+           
+            background: linear-gradient(45deg, orange, blue, green, red);
+            color:  rgb(225, 236, 225);
+            text-align: center;
+            border: 5px solid rgb(19, 17, 17);
+            padding: 20px;
+            width: 500px;
+            margin: 50px auto;
+            border-radius: 15px;
+            box-shadow: yellow;
+        
+        }
+
+        div > button {
+            border: none;
+            padding: 7px 15px;
+            border-radius: 10px;
+            color: aqua;
+            
+            
+        }
+
+        div > button:hover {
+            color: rgb(255, 0, 149);
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>
+            Result : 
+            <span id="display">Res</span>
+        </h1>
+        <button onclick="sum()">Addition</button>
+        <button onclick="sub()">Subtraction</button>
+        <button onclick="mul()">Multiplication</button>
+        <button onclick="div()">Division</button>
+    </div>
+
+    <!-- Script Code -->
+    <script>
+        let spanTag = document.getElementById("display");
+
+        function sum() {
+            let n1 = 10, n2 = 20;
+            spanTag.textContent = n1 + n2;
+        }
+
+        function sub() {
+            let n1 = 10, n2 = 20;
+            spanTag.textContent = n1 - n2;
+        }
+
+        function mul() {
+            let n1 = 10, n2 = 20;
+            spanTag.textContent = n1 * n2;
+        }
+
+        function div() {
+            let n1 = 10, n2 = 20;
+            if (n2 !== 0) {
+                spanTag.textContent = n1 / n2;
+            } else {
+                spanTag.textContent = "Division by 0 not allowed";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ToDoList</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+      width: 350px;
+    }
+    h2 {
+      text-align: center;
+      background: #333;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: purple;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: darkviolet;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 15px;
+    }
+    li {
+      background: #eee;
+      padding: 10px;
+      margin-bottom: 8px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .delete-btn {
+      background: red;
+      color: white;
+      border: none;
+      padding: 5px 8px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>ToDoList</h2>
+    <form id="task-form">
+      <input type="text" id="task-ele" placeholder="Enter your task">
+      <button type="submit">Submit</button>
+    </form>
+    <ul id="task-list"></ul>
+  </div>
+
+  <script>
+    let taskFormEl = document.getElementById('task-form');
+    let taskInpEl = document.getElementById('task-ele');
+    let taskListEl = document.getElementById('task-list');
+
+    // Load saved tasks
+    let taskList = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : [];
+    displayTasks(taskList);
+
+    taskFormEl.addEventListener('submit', function(e) {
+      e.preventDefault();
+      let task = taskInpEl.value.trim();
+      if(task === "") return;
+      taskList.unshift(task);
+      localStorage.setItem('tasks', JSON.stringify(taskList));
+      displayTasks(taskList);
+      taskInpEl.value = "";
+    });
+
+    function displayTasks(tasks) {
+      taskListEl.innerHTML = "";
+      tasks.forEach((task, index) => {
+        let li = document.createElement('li');
+        li.innerHTML = `${task} <button class="delete-btn" onclick="deleteTask(${index})">X</button>`;
+        taskListEl.appendChild(li);
+      });
+    }
+
+    function deleteTask(index) {
+      taskList.splice(index, 1);
+      localStorage.setItem('tasks', JSON.stringify(taskList));
+      displayTasks(taskList);
+    }
+  </script>
+</body>
+</html>
